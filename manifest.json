@@ -2,12 +2,19 @@
   "manifest_version": 2,
   "name": "FormFill",
   "version": "0.1",
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "permissions": [
+      "activeTab"
+  ],
   "content_scripts": [
     {
       "matches": [
         "<all_urls>"
       ],
-      "js": ["jquery-3.4.1.min.js", "content.js"]
+      "js": ["jquery-3.4.1.min.js", "content.js"],
+      "css": ["styles.css"]
     }
   ]
 }
