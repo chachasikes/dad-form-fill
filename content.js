@@ -5,7 +5,7 @@ $(document).ready(function() {
     constructor() {
       this.currentSet = 0,
       this.formFieldMap = {
-        text: "text_field_1"
+        text: "#text_field_1"
       };
       this.data = null;
       this.csvData = null;
@@ -37,7 +37,19 @@ $(document).ready(function() {
     }
 
     updateFormFields() {
-
+      this.csvData[this.currentSet].forEach(item => {
+        let selector = this.formFieldMap[item.type];
+        if (selector !== undefined && selector !== null) {
+          let el = document.querySelector(selector);
+          if (el !== undefined && el !== null) {
+            switch(item.type) {
+              case 'text':
+                el.setAttribute('value', item.question);
+                break;
+            }
+          }
+        }
+      });
     }
 
     getCSVFile(url) {
@@ -57,7 +69,7 @@ $(document).ready(function() {
     }
 
     getSetsAsSelect(data) {
-      let options = "";
+      let options = '<option value="0">Select a question set</option>';
       let uniqueSets = {};
       data.forEach(function(item) {
         uniqueSets[item.set] = item.set;
